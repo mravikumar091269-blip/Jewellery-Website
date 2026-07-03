@@ -24,22 +24,22 @@ A responsive Jewellery Website built using **HTML**, **CSS**, **JavaScript**, **
 
 <table>
   <tr>
-    <td><img src="Jewellery-Website/screenshots/1.jpg" width="350"></td>
-    <td><img src="Jewellery-Website/screenshots/2.jpg" width="350"></td>
-    <td><img src="Jewellery-Website/screenshots/3.jpg" width="350"></td>
-    <td><img src="Jewellery-Website/screenshots/4.jpg" width="350"></td>
+    <td><img src="Jewellery-website/screenshots/1.jpg" width="350"></td>
+    <td><img src="Jewellery-website/screenshots/2.jpg" width="350"></td>
+    <td><img src="Jewellery-website/screenshots/3.jpg" width="350"></td>
+    <td><img src="Jewellery-website/screenshots/4.jpg" width="350"></td>
   </tr>
   <tr>
-    <td><img src="Jewellery-Website/screenshots/5.jpg" width="350"></td>
-    <td><img src="Jewellery-Website/screenshots/6.jpg" width="350"></td>  
-    <td><img src="Jewellery-Website/screenshots/7.jpg" width="350"></td>
-    <td><img src="Jewellery-Website/screenshots/8.jpg" width="350"></td>
+    <td><img src="Jewellery-website/screenshots/5.jpg" width="350"></td>
+    <td><img src="Jewellery-website/screenshots/6.jpg" width="350"></td>  
+    <td><img src="Jewellery-website/screenshots/7.jpg" width="350"></td>
+    <td><img src="Jewellery-website/screenshots/8.jpg" width="350"></td>
   </tr>
 </table>
 
 ## 🎥 Demo Video
 
-[Watch the Demo Video](Jewellery-Website/Demovideo/Jewellery-demo.mp4)
+[Watch the Demo Video](Jewellery-website/Demovideo/Jewellery-demo.mp4)
 
 ## 👩‍💻 Author
 
