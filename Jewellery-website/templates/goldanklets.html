@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jewellery Collection</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:'Poppins',sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    overflow-x:hidden;
+    background:#faf7ff;
+    padding:40px 0;
+}
+
+/* Animated Background */
+
+.bg{
+    position:fixed;
+    inset:-20%;
+    z-index:-2;
+}
+
+.blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(100px);
+    animation:move 18s infinite alternate ease-in-out;
+}
+
+.blob:nth-child(1){
+    width:550px;
+    height:550px;
+    background:#c084fc;
+    top:5%;
+    left:5%;
+}
+
+.blob:nth-child(2){
+    width:500px;
+    height:500px;
+    background:#fde68a;
+    right:10%;
+    top:0;
+    animation-delay:3s;
+}
+
+.blob:nth-child(3){
+    width:650px;
+    height:650px;
+    background:#9333ea;
+    bottom:-15%;
+    left:30%;
+    animation-delay:5s;
+}
+
+@keyframes move{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(100px,-80px) scale(1.25);
+    }
+}
+
+/* Main Container */
+
+.container{
+    width:95%;
+    max-width:1400px;
+
+    background:rgba(255,255,255,.20);
+
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    border-radius:35px;
+
+    padding:45px;
+
+    box-shadow:
+    0 20px 70px rgba(124,58,237,.15),
+    0 0 40px rgba(212,175,55,.15);
+}
+
+h1{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    font-size:3rem;
+
+    background:linear-gradient(
+        90deg,
+        #d4af37,
+        #fff3b0,
+        #d4af37
+    );
+
+    background-size:300%;
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+
+    animation:shine 5s linear infinite;
+
+    margin-bottom:40px;
+}
+
+@keyframes shine{
+    from{
+        background-position:0%;
+    }
+    to{
+        background-position:300%;
+    }
+}
+
+/* Cards */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:rgba(255,255,255,.45);
+
+    border:1px solid rgba(255,255,255,.4);
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:.4s ease;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+
+    box-shadow:
+    0 25px 45px rgba(124,58,237,.15),
+    0 0 30px rgba(212,175,55,.25);
+}
+
+.card img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+}
+
+.card h3{
+    text-align:center;
+    color:#4c1d95;
+    padding:18px;
+    font-size:1.3rem;
+}
+
+/* Popup */
+
+.popup{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:none;
+    justify-content:center;
+    align-items:center;
+
+    z-index:1000;
+}
+
+.popup-box{
+    width:90%;
+    max-width:900px;
+    height:auto;
+    min-height:520px;
+    background:white;
+    border-radius:30px;
+    overflow:hidden;
+    display:flex;
+}
+
+@keyframes popupShow{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.popup-image{
+    width:45%;
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+}
+
+.popup-image img{
+    width:100%;
+    max-width:380px;
+    max-height:440px;
+    object-fit:contain;
+}
+
+.popup-content{
+    width:55%;
+    padding:30px;
+    overflow-y:auto;
+}
+.details-grid{
+
+    display:grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap:16px 25px;
+
+    margin-top:20px;
+}
+
+.label{
+
+    color:#4c1d95;
+
+    font-weight:600;
+}
+
+.value{
+
+    color:#444;
+
+    font-weight:500;
+}
+
+.update-btn{
+
+    margin-left:12px;
+
+    padding:7px 16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:linear-gradient(
+        135deg,
+        #d4af37,
+        #f6d365
+    );
+
+    color:#fff;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.update-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 20px rgba(212,175,55,.35);
+}
+
+.total-box{
+
+    margin-top:35px;
+
+    padding:18px 20px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+    135deg,
+    rgba(212,175,55,.15),
+    rgba(147,51,234,.08));
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:1.2rem;
+
+    font-weight:700;
+
+    color:#4c1d95;
+}
+.popup-content h2{
+    color:#4c1d95;
+    margin-bottom:20px;
+}
+
+.popup-content p{
+    color:#666;
+    line-height:1.8;
+}
+
+.close-btn{
+    position:absolute;
+    top:20px;
+    right:25px;
+
+    font-size:32px;
+    color:white;
+
+    cursor:pointer;
+}
+
+
+.details-grid{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-top:20px;
+}
+
+.detail-row{
+    display:grid;
+    grid-template-columns:150px 90px 170px 120px;
+    gap:10px;
+    align-items:center;
+}
+
+.label{
+    color:#4c1d95;
+    font-weight:600;
+}
+
+.value{
+    color:#444;
+    font-weight:500;
+}
+
+.total-box{
+    margin-top:25px;
+    padding:18px;
+    border-radius:16px;
+    background:linear-gradient(135deg,rgba(212,175,55,.15),rgba(147,51,234,.08));
+    display:flex;
+    justify-content:space-between;
+    font-size:1.3rem;
+    font-weight:700;
+    color:#4c1d95;
+}
+
+@media(max-width:768px){
+
+    .popup-box{
+        flex-direction:column;
+        height: auto;
+        min-height: unset;
+    }
+
+    .popup-image{
+        width: 100%;
+    }
+
+    .popup-content{
+        width: 100%;
+    }
+
+    .popup-image img{
+        height:300px;
+        max-width: 100%;
+    }
+
+    h1{
+        font-size:2.2rem;
+    }
+}
+
+</style>
+</head> 
+<body> 
+<div class="bg"> 
+    <div class="blob"></div> 
+    <div class="blob"></div> 
+    <div class="blob"></div> 
+</div> 
+<div class="container"> 
+    <h1>Gold Anklet Collection</h1> 
+    <div class="cards"> 
+        <div class="card" onclick="showPopup('/goldanklet/gant1.jpg','Design 1')"> 
+            <img src="/goldanklet/gant1.jpg"> 
+            <h3>Design 1</h3> 
+        </div> 
+        <div class="card" onclick="showPopup('/goldanklet/gant2.jpg','Design 2')"> 
+            <img src="/goldanklet/gant2.jpg"> 
+            <h3>Design 2</h3> 
+        </div> 
+        <div class="card" onclick="showPopup('/goldanklet/gant3.jpg','Design 3')"> 
+            <img src="/goldanklet/gant3.jpg"> 
+            <h3>Design 3</h3> 
+        </div> 
+        <div class="card" onclick="showPopup('/goldanklet/gant4.jpg','Design 4')"> 
+            <img src="/goldanklet/gant4.jpg"> 
+            <h3>Design 4</h3> 
+        </div> 
+        
+    </div> 
+</div>
+
+<div class="popup" id="popup">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <div class="popup-box">
+        <div class="popup-image">
+            <img id="popupImg" src="" alt="Jewellery Design">
+        </div>
+        <div class="popup-content">
+            <h2 id="popupTitle">Design Detail</h2>
+            <div class="details-grid">
+                <div class="detail-row">
+                    <div class="label">Today Gold Rate (22K)</div>
+                    <div class="value">₹ <span id="todayGoldRate">0</span></div>
+                    <div class="value"><button class="update-btn" onclick="updateGoldRate()">Update</button></div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="label">Gold Weight</div>
+                    <div class="value"><span id="goldWeight">0</span> g</div>
+                    <div class="label">Gold Price Amount</div>
+                    <div class="value">₹ <span id="goldPriceAmount">0</span></div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="label">Making Charge %</div>
+                    <div class="value"><span id="makingPercent">0</span></div>
+                    <div class="label">Making Amount</div>
+                    <div class="value">₹ <span id="makingAmount">0</span></div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="label">Wastage %</div>
+                    <div class="value"><span id="wastePercent">0</span></div>
+                    <div class="label">Wastage Amount</div>
+                    <div class="value">₹ <span id="wasteAmount">0</span></div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="label">Tax %</div>
+                    <div class="value"><span id="taxPercent">0</span></div>
+                    <div class="label">Tax Amount</div>
+                    <div class="value">₹ <span id="taxAmount">0</span></div>
+                </div>
+
+                <div class="total-box">
+                    <span>Total Amount</span>
+                    <span id="totalAmount">₹ 0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showPopup(image,title){
+    document.getElementById("popupImg").src=image;
+    document.getElementById("popupTitle").innerText=title;
+    document.getElementById("popup").style.display="flex";
+    
+    // Auto-fetch data corresponding to selected design
+    fetchDesignData(title);
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+// Close popup on background click
+window.onclick = function(event) {
+    let popup = document.getElementById("popup");
+    if (event.target == popup) {
+        popup.style.display = "none";
+    }
+}
+
+// Global placeholder variables to store live fetched values
+let liveGoldRate = 7600;
+
+
+async function fetchDesignData(designName){
+
+    const response =
+    await fetch(
+    "http://127.0.0.1:5000/anklet-design/" +
+    encodeURIComponent(designName)
+);
+
+    const item =
+    await response.json();
+
+    console.log("Database Data:", item);
+
+    if(item){
+
+        document.getElementById("goldWeight")
+        .innerText = item.gold_weight;
+
+        document.getElementById("makingPercent")
+        .innerText = item.making_percent;
+
+        document.getElementById("wastePercent")
+        .innerText = item.waste_percent;
+
+        document.getElementById("taxPercent")
+        .innerText = item.tax_percent;
+
+        calculateBill({
+            weight: parseFloat(item.gold_weight),
+            making: parseFloat(item.making_percent),
+            waste: parseFloat(item.waste_percent),
+            tax: parseFloat(item.tax_percent)
+        });
+    }
+}
+
+function calculateBill(item) {
+    let goldPrice = item.weight * liveGoldRate;
+    let makingCharges = goldPrice * (item.making / 100);
+    let wastageCharges = goldPrice * (item.waste / 100);
+    let subTotal = goldPrice + makingCharges + wastageCharges;
+    let taxAmount = subTotal * (item.tax / 100);
+    let totalBill = subTotal + taxAmount;
+
+    document.getElementById("goldPriceAmount").innerText = Math.round(goldPrice).toLocaleString('en-IN');
+    document.getElementById("makingAmount").innerText = Math.round(makingCharges).toLocaleString('en-IN');
+    document.getElementById("wasteAmount").innerText = Math.round(wastageCharges).toLocaleString('en-IN');
+    document.getElementById("taxAmount").innerText = Math.round(taxAmount).toLocaleString('en-IN');
+    document.getElementById("totalAmount").innerText = "₹ " + Math.round(totalBill).toLocaleString('en-IN');
+}
+
+async function updateGoldRate() {
+    try {
+        const response = await fetch("https://api.metals.dev/v1/latest", {
+            method: "GET",
+            headers: {
+                "x-access-token": "YOUR API KEY",
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("API request failed");
+        }
+
+        const data = await response.json();
+
+        let goldPerOunce = data.price;
+        let goldPerGram = goldPerOunce / 31.1035;
+
+        liveGoldRate = goldPerGram;
+
+        document.getElementById("todayGoldRate").innerText =
+            Math.round(goldPerGram).toLocaleString("en-IN");
+
+        let currentTitle =
+            document.getElementById("popupTitle").innerText;
+
+        fetchDesignData(currentTitle);
+
+        alert("Gold rate updated from live API!");
+
+    } catch (error) {
+        console.error(error);
+        alert("Failed to fetch gold rate. Check API key or internet.");
+    }
+}
+</script>
+</body>
+</html>

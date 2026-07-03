@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Metal Price Calculator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    background:#faf7ff;
+    position:relative;
+}
+
+/* background */
+.bg{
+    position:fixed;
+    inset:-20%;
+    z-index:-2;
+}
+
+.blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    animation:move 20s infinite alternate ease-in-out;
+}
+
+.blob:nth-child(1){
+    width:500px;
+    height:500px;
+    background:#c084fc;
+    left:5%;
+    top:10%;
+}
+
+.blob:nth-child(2){
+    width:450px;
+    height:450px;
+    background:#fde68a;
+    right:10%;
+    top:5%;
+    animation-delay:2s;
+}
+
+.blob:nth-child(3){
+    width:600px;
+    height:600px;
+    background:#a855f7;
+    bottom:-10%;
+    left:30%;
+    animation-delay:4s;
+}
+
+@keyframes move{
+    from{transform:translate(0,0) scale(1);}
+    to{transform:translate(120px,-80px) scale(1.25);}
+}
+
+.container{
+
+    width:95%;
+    max-width:950px;
+
+    background:rgba(255,255,255,.28);
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+
+    border:1px solid rgba(255,255,255,.45);
+
+    border-radius:30px;
+
+    padding:40px;
+
+    box-shadow:
+    0 20px 60px rgba(124,58,237,.15),
+    0 0 40px rgba(212,175,55,.15);
+
+    animation:entry .9s ease;
+}
+
+@keyframes entry{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* TITLE */
+h1{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    font-size:2.5rem;
+    margin-bottom:20px;
+
+    background:linear-gradient(90deg,#d4af37,#fff3b0,#d4af37);
+    background-size:300% 100%;
+
+    background-clip:text;
+    -webkit-background-clip:text;
+    color:transparent;
+
+    animation:shine 5s linear infinite;
+}
+.gold-title{
+    background:linear-gradient(90deg,#d4af37,#fff3b0,#d4af37);
+    background-size:300% 100%;
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+}
+
+.silver-title{
+    background:linear-gradient(90deg,#475569,#cbd5e1,#475569);
+    background-size:300%;
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+}
+
+@keyframes shine{
+    from{background-position:0%;}
+    to{background-position:300%;}
+}
+
+/* DROPDOWN */
+
+/* PREMIUM GLASS DROPDOWN (FULL CUSTOM LOOK) */
+.mode-select{
+    display:flex;
+    justify-content:center;
+    margin-bottom:25px;
+    position:relative;
+}
+
+/* wrapper for custom arrow glow */
+.mode-select::after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:52px;
+    border-radius:16px;
+    pointer-events:none;
+    box-shadow:0 0 0 1px rgba(212,175,55,.15);
+    transition:0.3s ease;
+}
+
+select{
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+
+    width:220px;
+
+    padding:14px 45px 14px 18px;
+
+    border-radius:16px;
+    border:1px solid rgba(212,175,55,.25);
+
+    background:rgba(255,255,255,.25);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+
+    color:#4c1d95;
+
+    cursor:pointer;
+
+    transition:all 0.35s ease;
+
+    box-shadow:
+        0 8px 25px rgba(124,58,237,.08),
+        inset 0 0 0 1px rgba(255,255,255,.2);
+
+    /* REMOVE ugly native feel */
+    background-image:none;
+}
+
+/* CUSTOM GOLD ARROW */
+.mode-select{
+    position:relative;
+}
+
+.mode-select select{
+    background-image:
+        linear-gradient(45deg, transparent 50%, #d4af37 50%),
+        linear-gradient(135deg, #d4af37 50%, transparent 50%);
+    background-position:
+        calc(100% - 22px) 50%,
+        calc(100% - 16px) 50%;
+    background-size:6px 6px;
+    background-repeat:no-repeat;
+}
+
+/* HOVER = PREMIUM GOLD GLOW */
+select:hover{
+    transform:translateY(-2px);
+    border:1px solid rgba(212,175,55,.6);
+
+    box-shadow:
+        0 15px 35px rgba(212,175,55,.25),
+        0 10px 25px rgba(124,58,237,.12);
+}
+
+/* FOCUS STATE */
+select:focus{
+    outline:none;
+
+    box-shadow:
+        0 0 0 3px rgba(212,175,55,.25),
+        0 15px 35px rgba(124,58,237,.15);
+
+    border:1px solid rgba(212,175,55,.7);
+}
+
+/* OPTION STYLING (works in most browsers) */
+option{
+    background:#ffffff;
+    color:#4c1d95;
+    font-weight:500;
+}
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px 40px;
+}
+
+.field{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* LABEL (clean premium look) */
+label{
+    min-width:170px;
+    font-weight:600;
+    color:#4c1d95;
+}
+
+/* INPUT */
+input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:12px 15px;
+    border-radius:14px;
+    background:rgba(255,255,255,.85);
+}
+
+/* BUTTON */
+.update-btn{
+    border:none;
+    cursor:pointer;
+    padding:12px 18px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#d4af37,#b8860b);
+    color:white;
+    font-weight:600;
+}
+
+/* BOX */
+.box{
+    background:rgba(255,255,255,.6);
+    border-radius:16px;
+    padding:14px 18px;
+    transition:.3s;
+}
+
+.box:hover{
+    transform:translateY(-3px);
+}
+
+.box span:first-child{
+    font-size:0.8rem;
+    font-weight:600;
+    color:#6b21a8;
+    letter-spacing:0.5px;
+}
+
+.amount{
+    float:right;
+    font-weight:700;
+}
+
+/* TOTAL */
+.total{
+    background:linear-gradient(135deg,rgba(212,175,55,.25),rgba(124,58,237,.15));
+    border:1px solid rgba(212,175,55,.25);
+}
+
+.total .amount{
+    font-size:1.4rem;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .grid{grid-template-columns:1fr;}
+    label{min-width:130px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+</div>
+
+<div class="container">
+
+<h1 id="title" class="gold-title">Gold Price Calculator</h1>
+
+<div class="mode-select">
+<select id="mode">
+    <option value="gold">Gold</option>
+    <option value="silver">Silver</option>
+</select>
+</div>
+
+<div class="grid">
+
+<div class="field">
+<label id="rateLabel">GOLD RATE</label>
+<input type="number" id="rate" readonly>
+<button id="updateRate" class="update-btn">UPDATE</button>
+</div>
+
+<div></div>
+
+<div class="field">
+<label id="weightLabel">GOLD WEIGHT</label>
+<input type="number" id="weight">
+</div>
+
+<div class="box">
+<span id="amountLabel">GOLD PRICE</span>
+<span class="amount" id="goldAmount">₹0.00</span>
+</div>
+
+<div class="field">
+<label>MAKING CHARGE %</label>
+<input type="number" id="mk">
+</div>
+
+<div class="box">
+<span>MAKING CHARGE</span>
+<span class="amount" id="mkAmount">₹0.00</span>
+</div>
+
+<div class="field">
+<label>WASTAGE %</label>
+<input type="number" id="waste">
+</div>
+
+<div class="box">
+<span>WASTAGE CHARGE</span>
+<span class="amount" id="wasteAmount">₹0.00</span>
+</div>
+
+<div class="field">
+<label>TAX %</label>
+<input type="number" id="tax" value="3">
+</div>
+
+<div class="box">
+<span>TAX AMOUNT</span>
+<span class="amount" id="taxAmount">₹0.00</span>
+</div>
+
+<div></div>
+
+<div class="box total">
+<span>TOTAL AMOUNT</span>
+<span class="amount" id="totalAmount">₹0.00</span>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let mode = "gold";
+
+/* API PLACEHOLDERS */
+const modeData = {
+    gold: {
+        apiLink: "https://api.metals.dev/v1/latest",
+        apiKey: "PTMYTSHNRS2UN62U6OQC2622U6OQC"
+    },
+    silver: {
+        apiLink: "https://api.metals.dev/v1/latest",
+        apiKey: "PTMYTSHNRS2UN62U6OQC2622U6OQC"
+    }
+};
+
+document.getElementById("mode").addEventListener("change",(e)=>{
+    mode = e.target.value;
+    updateUI();
+    updateRate();
+});
+
+function updateUI(){
+
+    const name = mode.toUpperCase();
+
+    document.getElementById("title").innerText =
+        `${name} PRICE CALCULATOR`;
+
+    document.getElementById("rateLabel").innerText =
+        `${name} RATE`;
+
+    document.getElementById("weightLabel").innerText =
+        `${name} WEIGHT`;
+
+    document.getElementById("amountLabel").innerText =
+        `${name} PRICE`;
+
+    /* THEME SWITCHING */
+
+    if(mode === "silver"){
+
+        // Silver page styling like Code 2
+
+        document.body.style.background = "#faf7ff";
+
+        document.querySelector(".blob:nth-child(1)")
+            .style.background = "#cbd5e1";
+
+        document.querySelector(".blob:nth-child(2)")
+            .style.background = "#94a3b8";
+
+        document.querySelector(".blob:nth-child(3)")
+            .style.background = "#64748b";
+
+        document.querySelector(".container").style.boxShadow =
+            "0 20px 70px rgba(100,116,139,.25), 0 0 40px rgba(100,116,139,.20)";
+
+        document.getElementById("title").className = "silver-title";
+
+    }
+    else if(mode === "gold"){
+
+        // Original gold theme
+
+        document.querySelector(".blob:nth-child(1)")
+            .style.background = "#c084fc";
+
+        document.querySelector(".blob:nth-child(2)")
+            .style.background = "#fde68a";
+
+        document.querySelector(".blob:nth-child(3)")
+            .style.background = "#a855f7";
+
+        document.querySelector(".container").style.boxShadow =
+            "0 20px 60px rgba(124,58,237,.15), 0 0 40px rgba(212,175,55,.15)";
+
+        document.getElementById("title").className = "gold-title";
+    }
+    
+}
+
+document.querySelectorAll("input").forEach(i=>{
+    i.addEventListener("input", calculate);
+});
+
+document.getElementById("updateRate").addEventListener("click", updateRate);
+
+async function updateRate(){
+
+    try{
+
+        const { apiLink, apiKey } = modeData[mode];
+
+        const url = `${apiLink}?api_key=${apiKey}&currency=INR&unit=g`;
+
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        const data = await response.json();
+        console.log("API DATA:", data);
+
+        let rate = 0;
+
+        if(mode === "gold"){
+            rate = data.metals.gold;
+        }
+        else if(mode === "silver"){
+            rate = data.metals.silver;
+        }
+
+        document.getElementById("rate").value = Number(rate).toFixed(2);
+
+        calculate();
+
+    }
+    catch(error){
+        console.error(error);
+        alert("API Error / CORS issue");
+    }
+}
+window.onload = function(){
+
+    mode = "gold";
+
+    updateUI();
+
+    updateRate();
+
+};
+
+function calculate(){
+
+    let rate = +document.getElementById("rate").value || 0;
+    let weight = +document.getElementById("weight").value || 0;
+    let mk = +document.getElementById("mk").value || 0;
+    let waste = +document.getElementById("waste").value || 0;
+    let tax = +document.getElementById("tax").value || 0;
+
+    let base = rate * weight;
+    let mkAmt = base * mk / 100;
+    let wasteAmt = base * waste / 100;
+
+    let subtotal = base + mkAmt + wasteAmt;
+    let taxAmt = subtotal * tax / 100;
+    let total = subtotal + taxAmt;
+
+    document.getElementById("goldAmount").innerText = "₹" + base.toLocaleString('en-IN',{minimumFractionDigits:2});
+    document.getElementById("mkAmount").innerText = "₹" + mkAmt.toLocaleString('en-IN',{minimumFractionDigits:2});
+    document.getElementById("wasteAmount").innerText = "₹" + wasteAmt.toLocaleString('en-IN',{minimumFractionDigits:2});
+    document.getElementById("taxAmount").innerText = "₹" + taxAmt.toLocaleString('en-IN',{minimumFractionDigits:2});
+    document.getElementById("totalAmount").innerText = "₹" + total.toLocaleString('en-IN',{minimumFractionDigits:2});
+}
+
+</script>
+
+</body>
+</html>

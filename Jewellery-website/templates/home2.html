@@ -1,0 +1,1180 @@
+,<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jewellery Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    font-family:'Poppins',sans-serif;
+    background:#faf7ff;
+    position:relative;
+
+    padding:40px 0;
+}
+/* Animated Background */
+
+.bg{
+    position:fixed;
+    inset:-20%;
+    z-index:-2;
+}
+
+.blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(100px);
+    animation:move 20s infinite alternate ease-in-out;
+}
+
+.blob:nth-child(1){
+    width:550px;
+    height:550px;
+    background:#14b8a6; /* Deep Emerald */
+    left:5%;
+    top:5%;
+}
+
+.blob:nth-child(2){
+    width:450px;
+    height:450px;
+    background:#fdba74; /* Rose Pink */
+    right:10%;
+    top:5%;
+    animation-delay:2s;
+}
+
+.blob:nth-child(3){
+    width:650px;
+    height:650px;
+    background:#fef3c7; /* Champagne Gold */
+    bottom:-15%;
+    left:30%;
+    animation-delay:4s;
+}
+
+@keyframes move{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(120px,-80px) scale(1.25);
+    }
+}
+
+/* Container */
+
+.container{
+
+    width:95%;
+    max-width:1200px;
+
+    background:rgba(255,255,255,.35);
+
+    backdrop-filter:blur(40px);
+-webkit-backdrop-filter:blur(40px);
+
+    border:1px solid rgba(255,255,255,.4);
+
+    border-radius:35px;
+
+    padding:45px;
+
+   box-shadow:
+   0 30px 80px rgba(168,85,247,.18),
+   0 0 60px rgba(255,215,0,.20),
+   inset 0 1px 1px rgba(255,255,255,.6);
+    animation:entry .8s ease;
+    margin:30px 0;
+}
+
+@keyframes entry{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Heading */
+
+h1{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    font-size:3rem;
+
+    background:linear-gradient(
+        90deg,
+        #d4af37,
+        #fff3b0,
+        #d4af37
+    );
+
+    background-size:300%;
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+
+    animation:shine 5s linear infinite;
+
+    margin-bottom:15px;
+}
+
+.navbar{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+
+    margin-bottom:40px;
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.35);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.4);
+}
+
+.navbar a{
+
+    text-decoration:none;
+
+    color:#4c1d95;
+
+    font-weight:600;
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    transition:.3s;
+}
+
+.navbar a:hover{
+
+    background:#d4af37;
+
+    color:white;
+}
+
+.navbar a.active{
+    background:#d4af37;
+    color:white;
+}
+
+@keyframes shine{
+    from{
+        background-position:0%;
+    }
+    to{
+        background-position:300%;
+    }
+}
+
+.subtitle{
+    text-align:center;
+    color:#5b21b6;
+    margin-bottom:40px;
+}
+
+/* Cards */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:30px;
+}
+
+.card{
+
+    background:rgba(255,255,255,.45);
+
+    border:1px solid rgba(255,255,255,.4);
+
+    border-radius:28px;
+
+    padding:40px 25px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.45s ease;
+
+
+    position:relative;
+    z-index:1;
+
+
+    overflow:hidden;
+
+    animation:floatCard 5s ease-in-out infinite;
+
+}
+.card:hover{
+    transform:
+    translateY(-10px)
+    scale(1.03);
+
+    background:rgba(255,255,255,.45);
+
+    box-shadow:
+    0 15px 35px rgba(212,175,55,.18),
+    0 8px 20px rgba(168,85,247,.10);
+}
+
+.card:nth-child(2){
+    animation-delay:1s;
+}
+
+.card:nth-child(3){
+    animation-delay:2s;
+}
+
+.card:nth-child(4){
+    animation-delay:3s;
+}
+
+@keyframes floatCard{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-150%;
+    width:60%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.5),
+        transparent
+    );
+
+    transform:skewX(-25deg);
+
+    transition:1s;
+}
+
+.card:hover{
+
+    transform:
+    translateY(-20px)
+    scale(1.06)
+    rotateX(5deg);
+
+    box-shadow:
+    0 35px 70px rgba(168,85,247,.25),
+    0 0 40px rgba(255,215,0,.35);
+
+}
+
+.card:hover::before{
+    opacity:1;
+    left:180%;
+}
+
+.icon{
+    width:85px;
+    height:85px;
+
+    margin:0 auto 20px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+    linear-gradient(
+    135deg,
+    #d4af37,
+    #fff3b0,
+    #d4af37);
+
+    box-shadow:
+    0 10px 25px rgba(212,175,55,.35);
+
+    position:relative;
+    z-index:2;
+}
+
+.icon span{
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.9);
+
+    box-shadow:
+    inset 0 0 10px rgba(0,0,0,.1);
+}
+
+.card h3{
+    color:#4c1d95;
+    margin-bottom:10px;
+    position:relative;
+    z-index:2;
+    font-size:1.5rem;
+
+    font-family:'Cinzel',serif;
+
+    color:#4c1d95;
+}
+
+.card p{
+    color:#666;
+    font-size:.95rem;
+    position:relative;
+    z-index:2;
+    font-size:1rem;
+
+    color:#555;
+
+    line-height:1.6;
+}
+
+@media(max-width:768px){
+
+    .container{
+        padding:25px;
+    }
+
+    h1{
+        font-size:2.2rem;
+    }
+
+}
+.image-box{
+    width:100%;
+    height:260px;
+    border-radius:22px;
+    overflow:hidden;
+    margin-bottom:18px;
+}
+
+.image-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:1s ease;
+}
+
+.card:hover .image-box img{
+   transform:scale(1.18) rotate(2deg);
+}
+
+.subtitle{
+
+    font-size:1.1rem;
+    font-weight:500;
+
+    color:#6b21a8;
+
+    margin-bottom:50px;
+
+    letter-spacing:1px;
+}
+
+/* Popup */
+
+.popup{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:none;
+    justify-content:center;
+    align-items:center;
+
+    z-index:1000;
+}
+
+
+
+@keyframes popupShow{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.popup-image{
+    width:45%;
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+}
+
+.popup-image img{
+    width:100%;
+    max-width:380px;
+    max-height:440px;
+    object-fit:contain;
+}
+
+.popup-content{
+    width:55%;
+    padding:30px;
+    overflow-y:auto;
+}
+.details-grid{
+
+    display:grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap:16px 25px;
+
+    margin-top:20px;
+}
+
+.label{
+
+    color:#1e293b;
+
+    font-weight:600;
+}
+
+.value{
+
+    color:#444;
+
+    font-weight:500;
+}
+
+
+   
+.update-btn{
+
+    margin-left:12px;
+
+    padding:8px 18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    transition:.3s ease;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.update-btn::before{
+
+    content:'';
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:100%;
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+    transition:.6s;
+}
+
+.update-btn:hover::before{
+    left:100%;
+}
+
+.update-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 20px rgba(148,163,184,.35);
+    
+}
+
+
+
+    /* GOLD THEME */
+
+    .popup-box{
+    width:90%;
+    max-width:900px;
+    min-height:520px;
+
+    border-radius:30px;
+    overflow:hidden;
+
+    display:flex;
+
+    animation:popupShow .35s ease;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.20);
+}
+
+.popup-box.gold-theme{
+     background:white;
+}
+
+.popup-box.gold-theme .popup-content h2 {
+ color:#4c1d95;
+}
+.popup-box.gold-theme .label{
+    color:#4c1d95;
+}
+
+.popup-box.gold-theme .update-btn{
+    background:linear-gradient(
+        135deg,
+        #d4af37,
+        #f6d365
+    );
+
+    color:white;
+}
+
+.popup-box.gold-theme .total-box{
+    background:linear-gradient(
+        135deg,
+        rgba(212,175,55,.15),
+        rgba(147,51,234,.08)
+    );
+
+    color:#4c1d95;
+}
+
+/* SILVER THEME */
+
+.popup-box.silver-theme{
+    
+    background:white;
+}
+
+.popup-box.silver-theme .popup-content h2,
+.popup-box.silver-theme .label{
+    color:#334155;
+}
+
+.popup-box.silver-theme .update-btn{
+    background:linear-gradient(
+        135deg,
+        #64748b,
+        #cbd5e1
+    );
+
+    color:white;
+}
+
+.popup-box.silver-theme .total-box{
+     background:linear-gradient(
+        135deg,
+        rgba(148,163,184,.15),
+        rgba(100,116,139,.08)
+    );
+
+    color:#334155;
+}
+
+
+.popup-content p{
+    color:#666;
+    line-height:1.8;
+}
+
+.close-btn{
+    position:absolute;
+    top:20px;
+    right:25px;
+
+    font-size:32px;
+    color:white;
+
+    cursor:pointer;
+}
+
+
+.details-grid{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-top:20px;
+}
+
+.detail-row{
+    display:grid;
+    grid-template-columns:180px 1fr 180px 1fr;
+    gap:15px;
+    align-items:center;
+}
+
+
+
+.value{
+    color:#444;
+    font-weight:500;
+    white-space:nowrap;
+}
+
+.total-box{
+    margin-top:25px;
+    padding:18px;
+    border-radius:16px;
+    background:linear-gradient(135deg,rgba(148,163,184,.15),rgba(100,116,139,.08));
+    display:flex;
+    justify-content:space-between;
+    font-size:1.3rem;
+    font-weight:700;
+    color:#334155;
+}
+
+@media(max-width:768px){
+
+    .popup-box{
+        flex-direction:column;
+        height: auto;
+        min-height: unset;
+    }
+
+    .popup-image{
+        width: 100%;
+    }
+
+    .popup-content{
+        width: 100%;
+    }
+
+    .popup-image img{
+        height:300px;
+        max-width: 100%;
+    }
+
+    h1{
+        font-size:2.2rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="bg">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+</div>
+
+<div class="container">
+
+    <h1>Jewellery Dashboard</h1>
+    <p class="subtitle">
+    Premium Jewellery Management System
+    </p>
+
+    <div class="navbar">
+
+    <a href="#" onclick="toggleCategory('necklaces', this)">
+        Necklaces
+    </a>
+
+    <a href="#" onclick="toggleCategory('rings', this)">
+        Rings
+    </a>
+
+    <a href="#" onclick="toggleCategory('bangles', this)">
+        Bangles
+    </a>
+
+    <a href="#" onclick="toggleCategory('earrings', this)">
+        Earrings
+    </a>
+
+    <a href="#" onclick="toggleCategory('anklets', this)">
+        Anklets
+    </a>
+
+</div>
+<div id="categoryCards" class="cards"></div>
+    <p class="subtitle" id="chooseText">
+        Choose a category to continue
+    </p>
+<div id="mainCards">
+    <div class="cards">
+
+        <div class="card" onclick="location.href='/calculator'">
+
+    <div class="image-box">
+        <img src="/images/calculator.jpg">
+    </div>
+
+    <h3>Live Calculator</h3>
+    <p>Calculate jewellery price instantly</p>
+
+</div>
+<div class="card" onclick="location.href='/gold'">
+
+    <div class="image-box">
+        <img src="/images/gold.jpg">
+    </div>
+
+    <h3>Gold Jewellery</h3>
+    <p>Explore premium gold jewellery collection</p>
+
+</div>
+<div class="card" onclick="location.href='/silver'">
+
+    <div class="image-box">
+        <img src="/images/silver.jpg">
+    </div>
+
+    <h3>Silver Jewellery</h3>
+    <p>Browse elegant silver jewellery designs</p>
+
+</div>
+
+    </div>
+</div>
+</div>
+<script>
+
+let currentCategory = null;
+
+function toggleCategory(category, element){
+
+    const mainCards =
+        document.getElementById("mainCards");
+
+    const categoryCards =
+        document.getElementById("categoryCards");
+
+    const chooseText =
+    document.getElementById("chooseText");
+
+    const navLinks =
+    document.querySelectorAll(".navbar a");
+
+    if(currentCategory === category){
+
+    categoryCards.innerHTML = "";
+
+    mainCards.style.display = "block";
+
+    chooseText.style.display = "block";
+
+    currentCategory = null;
+
+    element.classList.remove("active");
+
+    return;
+}
+    navLinks.forEach(link => {
+    link.classList.remove("active");
+});
+
+element.classList.add("active");
+
+    currentCategory = category;
+
+    chooseText.style.display = "none";
+
+    mainCards.style.display = "none";
+
+    fetch(`/api/${category}`)
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        categoryCards.innerHTML = "";
+
+        data.forEach(item => {
+
+            categoryCards.innerHTML += `
+
+    <div class="card"
+         onclick="showProductPopup(
+            '${item.design_name}',
+            '${item.metal_type}',
+            '${item.image_path}',
+            '${category}'
+         )">
+
+        <div class="image-box">
+
+            <img src="${item.image_path}"
+                 alt="${item.design_name}">
+
+        </div>
+
+        <h3>${item.design_name}</h3>
+
+        <p>${item.metal_type}</p>
+
+    </div>
+
+`;
+
+        });
+
+    });
+
+}
+let liveGoldRate = 0;
+let liveSilverRate = 0;
+
+let currentItem = null;
+let currentMetal = "";
+
+async function updateRate(){
+
+    try{
+
+        let symbol =
+            currentMetal === "Gold"
+            ? "XAU"
+            : "XAG";
+
+        const response =
+            await fetch(
+                `https://www.goldapi.io/api/${symbol}/INR`,
+                {
+                    headers:{
+                        "x-access-token":
+                        "goldapi-85ebe008b33f3450188bb4cee8e66e47-io"
+                    }
+                }
+            );
+
+        const data = await response.json();
+
+        console.log("Rate API Response:", data);
+
+        let perGram =
+            parseFloat(data.price) / 31.1035;
+
+        if(currentMetal === "Gold"){
+            liveGoldRate = perGram;
+        }
+        else{
+            liveSilverRate = perGram;
+        }
+
+        document.getElementById("todayRate").innerText =
+            Math.round(perGram).toLocaleString('en-IN');
+
+        calculateBill();
+
+    }
+    catch(error){
+
+        console.log(error);
+
+        alert("Rate update failed");
+    }
+}
+
+async function showProductPopup(
+    designName,
+    metalType,
+    imagePath,
+    category
+){
+
+    document.getElementById("popup").style.display = "flex";
+
+    document.getElementById("popupImg").src =
+        imagePath;
+
+    document.getElementById("popupTitle").innerText =
+        designName;
+
+    
+
+    let apiUrl = "";
+
+    if(category === "necklaces"){
+        apiUrl = metalType === "Gold"
+            ? "/design/" + encodeURIComponent(designName)
+            : "/silver_necklace/" + encodeURIComponent(designName);
+    }
+
+    else if(category === "rings"){
+        apiUrl = metalType === "Gold"
+            ? "/ring-design/" + encodeURIComponent(designName)
+            : "/silver_ring/" + encodeURIComponent(designName);
+    }
+
+    else if(category === "bangles"){
+        apiUrl = metalType === "Gold"
+            ? "/bangle-design/" + encodeURIComponent(designName)
+            : "/silver_bangle/" + encodeURIComponent(designName);
+    }
+
+    else if(category === "earrings"){
+        apiUrl = metalType === "Gold"
+            ? "/earring-design/" + encodeURIComponent(designName)
+            : "/silver_earring/" + encodeURIComponent(designName);
+    }
+
+    else if(category === "anklets"){
+        apiUrl = metalType === "Gold"
+            ? "/anklet-design/" + encodeURIComponent(designName)
+            : "/silver_anklet/" + encodeURIComponent(designName);
+    }
+
+    const response = await fetch(apiUrl);
+const item = await response.json();
+
+currentItem = item;
+currentMetal = metalType;
+
+/* Apply Theme */
+
+const popupBox =
+    document.getElementById("popupBox");
+
+popupBox.classList.remove(
+    "gold-theme",
+    "silver-theme"
+);
+
+if(metalType === "Gold"){
+    popupBox.classList.add("gold-theme");
+}
+else{
+    popupBox.classList.add("silver-theme");
+}
+
+/* Fill Data */
+
+document.getElementById("popupWeight").innerText =
+    item.gold_weight || item.silver_weight;
+
+document.getElementById("popupMaking").innerText =
+    item.making_percent;
+
+document.getElementById("popupWaste").innerText =
+    item.waste_percent;
+
+document.getElementById("popupTax").innerText =
+    item.tax_percent;
+
+updateRate();
+
+}
+
+function calculateBill(){
+
+    const item = {
+        weight: parseFloat(
+            currentItem.gold_weight ||
+            currentItem.silver_weight
+        ),
+        making: parseFloat(currentItem.making_percent),
+        waste: parseFloat(currentItem.waste_percent),
+        tax: parseFloat(currentItem.tax_percent)
+    };
+
+    const rate =
+        currentMetal === "Gold"
+        ? parseFloat(liveGoldRate)
+        : parseFloat(liveSilverRate);
+
+    let metalPrice =
+        item.weight * rate;
+
+    let makingAmount =
+        metalPrice * (item.making / 100);
+
+    let wasteAmount =
+        metalPrice * (item.waste / 100);
+
+    let subTotal =
+        metalPrice +
+        makingAmount +
+        wasteAmount;
+
+    let taxAmount =
+        subTotal * (item.tax / 100);
+
+    let total =
+        subTotal + taxAmount;
+
+    document.getElementById("metalAmount").innerText =
+        Math.round(metalPrice).toLocaleString('en-IN');
+
+    document.getElementById("makingAmount").innerText =
+        Math.round(makingAmount).toLocaleString('en-IN');
+
+    document.getElementById("wasteAmount").innerText =
+        Math.round(wasteAmount).toLocaleString('en-IN');
+
+    document.getElementById("taxAmount").innerText =
+        Math.round(taxAmount).toLocaleString('en-IN');
+
+    document.getElementById("totalAmount").innerText =
+        "₹ " +
+        Math.round(total).toLocaleString('en-IN');
+}
+function closePopup(){
+
+    document.getElementById("popup").style.display =
+        "none";
+}
+
+</script>
+
+<div class="popup" id="popup">
+
+    <span class="close-btn"
+          onclick="closePopup()">&times;</span>
+
+    <div class="popup-box" id="popupBox">
+
+        <div class="popup-image">
+            <img id="popupImg">
+        </div>
+
+        <div class="popup-content">
+
+            <h2 id="popupTitle"></h2>
+
+            <div class="details-grid">
+
+    <div class="detail-row">
+        <div class="label">Today's Rate</div>
+        <div class="value">
+            ₹ <span id="todayRate">0</span>
+        </div>
+
+        <div class="value">
+            <button class="update-btn"
+                    onclick="updateRate()">
+                Update
+            </button>
+        </div>
+    </div>
+
+    <div class="detail-row">
+        <div class="label">Weight</div>
+        <div class="value">
+            <span id="popupWeight">0</span> g
+        </div>
+
+        <div class="label">Metal Amount</div>
+        <div class="value">
+            ₹ <span id="metalAmount">0</span>
+        </div>
+    </div>
+
+    <div class="detail-row">
+        <div class="label">Making %</div>
+        <div class="value">
+            <span id="popupMaking">0</span>
+        </div>
+
+        <div class="label">Making Amount</div>
+        <div class="value">
+            ₹ <span id="makingAmount">0</span>
+        </div>
+    </div>
+
+    <div class="detail-row">
+        <div class="label">Waste %</div>
+        <div class="value">
+            <span id="popupWaste">0</span>
+        </div>
+
+        <div class="label">Waste Amount</div>
+        <div class="value">
+            ₹ <span id="wasteAmount">0</span>
+        </div>
+    </div>
+
+    <div class="detail-row">
+        <div class="label">Tax %</div>
+        <div class="value">
+            <span id="popupTax">0</span>
+        </div>
+
+        <div class="label">Tax Amount</div>
+        <div class="value">
+            ₹ <span id="taxAmount">0</span>
+        </div>
+    </div>
+
+    <div class="total-box">
+        <span>Total Amount</span>
+        <span id="totalAmount">₹ 0</span>
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
